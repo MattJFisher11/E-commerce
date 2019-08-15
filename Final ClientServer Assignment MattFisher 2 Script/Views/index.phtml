@@ -1,0 +1,134 @@
+<?php require('template/header.phtml') ?>
+<!-- This section is the more information section to retrieve information of a user   -->
+<div class="modal fade" id="MoreInfo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="Login">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h1>Information</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- This section is the items which will be up for sale -->
+<div class="jumbotron text-center">
+    <h1><i>Vroom</i></h1>
+    <p>Student Shopping Made Fast And Easy!</p>
+    <form method="post">
+        <div class="input-group">
+            <input type="text" list="JsonProductName" class="form-control" name="Search-Input" id="LiveSearch" placeholder="Search" autocomplete="off" onkeyup="ShowHint(this.value)">
+            <datalist id="JsonProductName"></datalist>
+            <span class="input-group-btn">
+        <button class="btn btn-danger" type="button">Go</button>
+      </span>
+        </div>
+            <ul class="list-group" id="txtHint"></ul>
+    </form>
+
+    <div class="container" id="Filter">
+        <div class="btn-group">
+            <form action="" method="post" name="FilterButtons">
+                <input type="submit" name="PriceLow-Submit" class="btn btn-primary" value="Price: Low To High">
+                <input type="submit" name="PriceHigh-Submit" class="btn btn-primary" value="Price: High To Low">
+                <input type="submit" name="ProductNameAZ-Submit" class="btn btn-primary" value="Product: A-Z">
+                <input type="submit" name="ProductNameZA-Submit" class="btn btn-primary" value="Product: Z-A">
+                <input type="submit" name="ProductExpiryEndingSoonest" class="btn btn-primary" value="Ending Soonest">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<?php
+/*
+ * If a session is created and the login is successful meaning the users is logged in then display the
+ * users address, name and email who posted the advert if not logged in do not display this information
+ * in the else statement
+ */
+if(isset($_SESSION["Email-Login"])) {
+    //create a view of get add and give it the variable $AddData
+    foreach ($view->GetAdd as $AddData) {
+        echo '<div class = "col-sm-6 col-md-4" id="View">';
+        echo '<div class="thumbnail">';
+        echo '<img src ="'.$AddData->getImage().'" id="Image"/></div>';
+        echo '<div class="row text-center">';
+        echo '<div class = "caption">';
+        // get the product name from get Add
+        echo '<p><strong>' . $AddData->getProductName() . '</strong></p>';
+        // get the product price from get Add
+        echo '<p>Price £<i>' . $AddData->getProductPrice() . '</i></p>';
+        // get the product expiry from get Add
+        echo '<p>Time Left : <i>' . $AddData->getProductExpiry() . '</i> Days</p>';
+        // get the product condition from get Add
+        echo '<p>Condition: <i>' . $AddData->getProductCondition() . '</i></p>';
+        // get the Users name who posted the add from get Add
+        echo '<p>Name: ' . $AddData->getName() . '</strong></p>';
+        // get the Users email who posted the add from get Add
+        echo '<p>Email: ' . $AddData->getEmailAddress() . '</strong></p>';
+        // get the Users address who posted the add from get Add
+        echo '<p>Address: ' . $AddData->getAddress() . '</strong></p>';
+        // get the Users Mobile Number who posted the add from get Add
+        echo '<p>Mobile: ' . $AddData->getMobileNumberSeller() . '</strong></p>';
+
+        //create a form which is given post so i can push and pull data
+        echo '<form method="post">';
+        // button If the user wishes to add the item to there wish list
+        echo '<input type="submit" name="Wish" id="Wish" class="glyphicon glyphicon-star-empty btn btn-success" value = "Wish" </input>';
+        /*
+         * These are hidden inputs which i use to get the information which i dont want displayed to the
+         * user for example the id of a product which i then use as a value and i can use this value to delete or
+         * add that particular item to the users wish list.
+         */
+        echo '<input type="hidden" name="WishAddID" value="'.$AddData->getAddID().'">';
+        echo '<input type="hidden" name="ProductNameWish" value="'.$AddData->getProductName().'">';
+        echo '<input type="hidden" name="ProductPriceWish" value="'.$AddData->getProductPrice().'">';
+        echo '<input type="hidden" name="ProductExpiryWish" value="'.$AddData->getProductExpiry().'">';
+        echo '<input type="hidden" name="ProductConditionWish" value="'.$AddData->getProductCondition().'">';
+        echo '<input type="hidden" name="ProductSellerNameWish" value="'.$AddData->getName().'">';
+        echo '<input type="hidden" name="ProductSellerEmailWish" value="'.$AddData->getEmailAddress().'">';
+        echo '<input type="hidden" name="ProductSellerAddressWish" value="'.$AddData->getAddress().'">';
+        echo '<input type="hidden" name="ProductWishListImage" value="'.$AddData->getImage().'">';
+        echo '</form>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+/*
+ * If a session is created and the login is successful meaning the users is logged in then display the
+ * users address, name and email who posted the advert if not logged in do not display this information
+ * in the else statement
+ */
+else
+{
+    //create a view of get add and give it the variable $AddData
+    foreach ($view->GetAdd as $AddData)
+    {
+        echo '<div class = "col-sm-6 col-md-4" id="View">';
+        echo '<div class = "thumbnail">';
+        echo '<img src ="'.$AddData->getImage().'" id="Image"/></div>';
+        echo '<div class="row text-center">';
+        echo '<div class = "caption">';
+        // get the product name from get Add
+        echo '<p><strong>' . $AddData->getProductName() . '</strong></p>';
+        // get the product price from get Add
+        echo '<p>Price £<i>' . $AddData->getProductPrice() . '</i></p>';
+        // get the product expiry from get Add
+        echo '<p>Time Left : <i>' . $AddData->getProductExpiry() . '</i></p>';
+        // get the product condition from get Add
+        echo '<p>Condition: <i>' . $AddData->getProductCondition() . '</i></p>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+?>
+
+<?php
+//Get the footer and display the phtml for that page
+require('template/footer.phtml')
+?>

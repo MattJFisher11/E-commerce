@@ -1,0 +1,246 @@
+<?php session_start();  ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style.css">
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div class="container">
+    <!--Navigation Bar-->
+    <!--User Logged In-->
+    <?php
+    $Admin =$_SESSION["Email-Login"];
+    if($Admin == "Matt@Fisher") {
+        echo ' <nav class="navbar-fixed navbar-inverse" role="navigation" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../../index.php">Home</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#FormPostAdd">Post An Add</a></li>
+                        <li><a href="../../WishList.php" >Wish List </a></li>
+                        <li><a href="../../admin.php" >Admin </a></li>
+                        <li><a href="" data-toggle="modal" name="MyAccount" data-target="#FormAccountDetails"><span class="glyphicon glyphicon-user"></span> MyAccount</a></li>
+                        <li><a href="../../UserLogout.php" data-toggle="modal" >Logout <span class="glyphicon glyphicon-log-out"></span></a></li>                             
+                    </ul>
+                </div>
+            </div>
+        </nav>';
+    }else if($_SESSION["Email-Login"]) {
+        echo ' <nav class="navbar-fixed navbar-inverse" role="navigation" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../../index.php">Home</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#FormPostAdd">Post An Add</a></li>
+                        <li><a href="../../WishList.php" >Wish List </a></li>
+                        <li><a href="" data-toggle="modal" name="MyAccount" data-target="#FormAccountDetails"><span class="glyphicon glyphicon-user"></span> MyAccount</a></li>
+                        <li><a href="../../UserLogout.php" data-toggle="modal" >Logout <span class="glyphicon glyphicon-log-out"></span></a></li>                             
+                    </ul>
+                </div>
+            </div>
+        </nav>';
+    }else {
+            // <!--Navigation Bar-->
+            // <!--User Not Logged In-->
+        echo ' <nav class="navbar-fixed navbar-inverse" role="navigation" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.php">Home</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#FormRegister"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#FormLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>';
+
+    }
+?>
+    <!--The Login Form-->
+    <div class="modal fade" id="FormLogin" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="Login">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h3>Login</h3>
+                    </div>
+                </div>
+                <!--The Login Information-->
+                <div class="modal-body">
+                    <form class="Form-Login" method="post" action="../../index.php">
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="email" class="form-control" name="Email-Login" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" class="form-control" name="Password-Login" required>
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox"> Remember me</label>
+                        </div>
+                        <button type="submit" name="Login-Submit" class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--The PostAdd Form-->
+    <div class="modal fade" id="FormPostAdd" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="PostAdd">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h3>Post An Add</h3>
+                    </div>
+                </div>
+                <!--The PostAdd Information-->
+                <div class="modal-body">
+                    <form class="Form-PostAdd" enctype="multipart/form-data" method="post" action="../../index.php" >
+                        <div class="form-group">
+                            <label for="ProductName-PostAdd">Product:</label>
+                            <input type="text" class="form-control" name="Name-PostAdd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductCondition-PostAdd">Condition:</label>
+                            <input type="text" class="form-control" name="ProductCondition-PostAdd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductPrice-PostAdd">Price:</label>
+                            <input type="text" class="form-control" name="ProductPrice-PostAdd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductExpiry-PostAdd">TimeLeft:</label>
+                            <input type="text" class="form-control" name="ProductExpiry-PostAdd" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="AdvertImage-Register">Advert Image:</label>
+                            <input type="file" name="Advert-Image" required/>
+                        </div>
+                        <button type="submit" name="Post-Submit" class="btn btn-success btn-block">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--The Register Form -->
+    <div class="modal fade" id="FormRegister" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="Register">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h1>Register</h1>
+                    </div>
+                </div>
+                <!--The Register Information-->
+                <div class="modal-body">
+                    <form class="Form-Register" method="post" action="../../index.php">
+                        <div class="form-group">
+                            <label for="Name-Register">Name:</label>
+                            <input type="text" class="form-control" name="Name-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Surname-Register">Surname:</label>
+                            <input type="text" class="form-control" name="Surname-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email-Register">Email address:</label>
+                            <input type="email" class="form-control" name="Email-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Mobile-Register">Mobile Number</label>
+                            <input type="number" class="form-control" name="Mobile-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password-Register">Password:</label>
+                            <input type="password" class="form-control" name="Password-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Address-Register">Address:</label>
+                            <input type="text" class="form-control" name="Address-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="DOB-Register">Date Of Birth:</label>
+                            <input type="text" class="form-control" name="DOB-Register" required>
+                        </div>
+                        <div class="form-group">
+                            <?php
+                            $randomNumber = rand(1000,9999);
+                            echo'<input type="hidden" name="StoreRandomVar" value="'.$randomNumber.'">';
+                            ?>
+                            <label for="Captcha-Register">Enter Value : <?php echo $randomNumber;?></label>
+                            <input type="text" class="form-control" name="textCaptchaInput" required>
+                        </div>
+                        <button type="submit" name="Register-Submit" class="btn btn-success btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                <div class="modal fade" id="FormAccountDetails" role="dialog">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="FormAccountDetails">
+                                <div class="modal-header">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <h1>Account Details</h1>
+                                </div>
+                            </div>
+                <!--The Account Information-->
+                <div class="modal-body">
+                    <form class="FormAccountDetails" method="post" >
+                        <div class="form-group">
+                            <?php
+                            foreach ($view->fetchUser as $User) {
+                                echo '<p>Name: ' . $User->getFirstName() . '</strong></p>';
+                                echo '<p>Surname: ' . $User->getEmailAddress() . '</strong></p>';
+                                echo '<p>Address: ' . $User->getAddress() . '</strong></p>';
+                                echo '<p>Date Of Birth: ' . $User->getDateOfBirth() . '</strong></p>';
+                                echo '<p>Mobile: ' . $User->getMobileNumber() . '</strong></p>';
+                                echo '<p>Password: ' . $User->getPassword() . '</strong></p>';
+                            }
+                            ?>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--

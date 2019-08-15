@@ -1,0 +1,35 @@
+<?php require('template/header.phtml')?>
+<!-- This section is the items which will be up for sale -->
+<div class="jumbotron text-center">
+    <h1><i>Vroom</i></h1>
+    <?php echo '<h2><i>Welcome Back '. $_SESSION['Email-Login'] . ' Here Is Your Wish List</i></h2>'; ?>
+    <p>Student Shopping Made Fast And Easy!</p>
+</div>
+        <?php
+        foreach ($view->GetAdd as $AddData) {
+            echo '<div class = "col-sm-6 col-md-4">';
+            echo '<div class = "thumbnail">';
+            echo '<img src ="'.$AddData->getWishImage().'" id="Image"/></div>';
+            echo '<div class="row text-center">';
+            echo '<div class = "caption">';
+            echo '<p><strong>' . $AddData->getProductName() . '</strong></p>';
+            echo '<p>Price £<i>' . $AddData->getProductPrice() . '</i></p>';
+            echo '<p>Time Left : <i>' . $AddData->getProductExpiry() . '</i></p>';
+            echo '<p>Condition: <i>' . $AddData->getProductCondition() . '</i></p>';
+            echo '<p>Name: ' . $AddData->getProductSellerName() . '</strong></p>';
+            echo '<p>Email: ' . $AddData->getProductSellerEmail() . '</strong></p>';
+            echo '<p>Address: ' . $AddData->getProductSellerAddress() . '</strong></p>';
+            echo '<form method="post">';
+            echo '<input type="submit" name="DeleteWish" class="btn btn-danger" value = "Delete" </input>';
+            echo '<input type="hidden" name="DeleteWish" value="'.$AddData->getWishListID().'">';
+            echo '</form>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+echo '</div>';
+        ?>
+<?php
+echo '</div>';
+require('template/footer.phtml')
+?>

@@ -1,0 +1,89 @@
+<?php require('template/header.phtml') ?>
+
+    <!-- This section is the items which will be up for sale -->
+    <div class="jumbotron text-center">
+        <h1><i>Vroom</i></h1>
+        <?php echo '<h2><i>Welcome '. $_SESSION['Email-Login'] . ' Here Is Your Administrator Portal</i></h2>'; ?>
+        <p>Student Shopping Made Fast And Easy!</p>
+    </div>
+
+    <div class="container">
+        <h3>User Accounts</h3>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>Date Of Birth</th>
+                <th>Delete User</th>
+            </tr>
+            </thead>
+            <?php
+            //create a view of fetch user and give it the variable users
+            foreach ($view->fetchUser as $User) {
+                echo '<tbody>';
+                echo '<tr>';
+                //gets the name of the user
+                echo '<td>'.$User->getFirstName().'</td>';
+                //gets the last name of the user
+                echo '<td>'.$User->getLastName().'</td>';
+                //gets the email address of the user
+                echo '<td>'.$User->getEmailAddress().'</td>';
+                //gets the address of the user
+                echo '<td>'.$User->getAddress().'</td>';
+                //gets the date of birth of the user
+                echo '<td>'.$User->getDateOfBirth().'</td>';
+                //create a form
+                echo '<form method="post">';
+                //create a delete button
+                echo '<th><input type="submit" name="DeleteUserAdmin" class="btn btn-danger" value="Delete"></th>';
+                //gets the email address and stores it as a value
+                echo '<input type="hidden" name="DeleteUserStored" value="'.$User->getEmailAddress().'">';
+                echo '</form>';
+                echo '</tr>';
+                echo '</tbody>';
+            }
+            ?>
+        </table>
+    </div>
+    <h3>Adverts</h3>
+<?php
+//create a view of get add and give it the variable $AddData
+    foreach ($view->GetAdd as $AddData) {
+        //create a view of get add and give it the variable $AddData
+            echo '<div class = "col-sm-6 col-md-4" id="View">';
+            echo '<div class = "thumbnail">';
+            echo '<img src ="'.$AddData->getImage().'" id="Image"/></div>';
+            echo '<div class="row text-center">';
+            echo '<div class = "caption">';
+            // get the product name from get Add
+            echo '<p><strong>' . $AddData->getProductName() . '</strong></p>';
+            // get the product price from get Add
+            echo '<p>Price £<i>' . $AddData->getProductPrice() . '</i></p>';
+            // get the product expiry from get Add
+            echo '<p>Time Left : <i>' . $AddData->getProductExpiry() . '</i> Days</p>';
+            // get the product condition from get Add
+            echo '<p>Condition: <i>' . $AddData->getProductCondition() . '</i></p>';
+            // get the Users name who posted the add from get Add
+            echo '<p>Name: ' . $AddData->getName() . '</strong></p>';
+            // get the Users email who posted the add from get Add
+            echo '<p>Email: ' . $AddData->getEmailAddress() . '</strong></p>';
+            /// get the Users address who posted the add from get Add
+            echo '<p>Address: ' . $AddData->getAddress() . '</strong></p>';
+            //create a form which is given post so i can push and pull data
+            echo '<form method="post">';
+            echo '<input type="submit" name="Delete" class="btn btn-danger" value="Delete">';
+            echo '<input type="hidden" name="DeleteID" value="'.$AddData->getAddID().'">';
+            echo '</form>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+    }
+echo '</div>';
+?>
+<?php
+//Get the footer and display the phtml for that page
+require('template/footer.phtml')
+?>

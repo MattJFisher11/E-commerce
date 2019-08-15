@@ -1,0 +1,73 @@
+
+.navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+.navbar-nav > li {
+    color: white;
+    float: none;
+    display: inline-block;
+}
+
+.jumbotron {
+    background-color: #30c9e9;
+    color: #fff;
+    padding: 100px 25px;
+    margin-top: 30px;
+    font-family: Montserrat, sans-serif;
+}
+.thumbnail {
+    background-color: #cde3eb;
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+    height: 300px;
+    width: 365px;
+}
+
+#txtHint
+{
+    text-align: left;
+
+
+}
+
+
+.footer
+{
+    background-color: #222222;
+    color: white;
+    margin-top: 30px;
+    padding-top: 30px;
+}
+
+#Image
+{
+    height: 300px;
+    width: 400px;
+}
+#View
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.footerDetails
+{
+    border-top: 1px solid white;
+    margin-top: 10px;
+    padding-top: 10px;
+    color: white;
+
+}
+.footer-links
+{
+
+}
+
+#Filter{
+    padding-top: 2%;
+
+}
+    /*background-color: #CDE3EB;
+
+
